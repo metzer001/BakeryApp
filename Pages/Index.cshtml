@@ -15,7 +15,7 @@
             <p class="description">@Model.FeaturedProduct.Description</p>
         </div>
         <div id="callToAction">
-            <a class="btn btn-danger order-button" asp-page="/order" asp-route-id="@Model.FeaturedProduct.Id" title="Order @Model.FeaturedProduct.Name">Order Now</a>
+            <a class="btn btn-danger order-button" asp-page="/order" asp-route-id="@Model.FeaturedProduct.Id" title="Order dv">Order Now</a>
         </div>
     </div>
 </div>
@@ -35,5 +35,8 @@
                 <a class="btn btn-sm btn-danger order-button float-right" asp-page="/order" asp-route-id="@product.Id" title="Order @product.Name">Order Now</a>
             </div>
         </div>
-    }
+    }    
 </div>
+
+
+<a class="btn btn-danger order-button" asp-page="/addproduct">Add Product</a>

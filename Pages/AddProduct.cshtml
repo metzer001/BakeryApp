@@ -1,0 +1,48 @@
+﻿@page
+@model BakeryApp.Pages.AddProductModel
+@{
+    ViewData["Title"] = "AddProduct";
+}
+
+<h1>AddProduct</h1>
+
+<form method="post" enctype="multipart/form-data">
+    <div class="row">
+        <div class="col-9">
+            <ul class="orderPageList" data-role="listview">
+                <li>
+                    <div class="form-group">
+                        <label asp-for="Name"></label>
+                        <input asp-for="Name" class="form-control form-control-sm" />
+                        <span asp-validation-for="Name"></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label asp-for="Description"></label>
+                        <textarea rows="1" asp-for="Description" class="form-control form-control-sm"></textarea>
+                        <span asp-validation-for="Description"></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label asp-for="Price"></label>
+                        <textarea rows="1" asp-for="Price" class="form-control form-control-sm"></textarea>
+                        <span asp-validation-for="Price"></span>
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label asp-for="ImageName"></label>
+                        <input type="file" name="ImageName" />
+                        <span asp-validation-for="ImageName"></span>
+                    </div>
+                </li>
+            </ul>
+            <p class="actions">
+                
+                <button class="btn btn-danger order-button">Add Product</button>
+            </p>
+        </div>
+    </div>
+</form>
