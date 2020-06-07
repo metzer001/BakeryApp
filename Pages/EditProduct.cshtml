@@ -1,0 +1,46 @@
+﻿@page "{id:int}"
+@model BakeryApp.Pages.EditProductModel
+@{
+    ViewData["Title"] = "Edit Product";
+}
+<h1>EditProduct</h1>
+
+
+
+<form method="post">
+    <div class="row">
+        <div class="col-3">
+            <img src="~/Images/Products/Thumbnails/@Model.Product.ImageName" class="img-fluid img-thumbnail" alt="Image of @Model.Product.Name" />
+        </div>
+        <div class="col-9">
+            <ul class="orderPageList" data-role="listview">
+                <li>
+                    <div class="form-group">
+                        <label asp-for="@Model.Product.Name" class="control-label"></label>
+                        <input asp-for="@Model.Product.Name" class="form-control" />
+                    </div>
+                </li>
+                <li>
+                    <div class="form-group">
+                        <label asp-for="@Model.Product.Description" class="control-label"></label>
+                        <input asp-for="@Model.Product.Description" class="form-control" />
+                    </div>
+                </li>
+                <li class="email">
+                    <div class="form-group">
+                        <label asp-for="@Model.Product.Price" class="control-label"></label>
+                        <input asp-for="@Model.Product.Price" class="form-control" />
+                    </div>
+                </li>
+            </ul>
+
+
+            <p class="actions">
+
+                <button type="submit">SUBMIT</button>
+                <input type="hidden" asp-for="Product" />
+                <a class="btn btn-danger order-button addproductbtn ml-5" asp-route-id="@Model.Id" asp-page="/editproduct">Edit Product</a>
+            </p>
+        </div>
+    </div>
+    </form>

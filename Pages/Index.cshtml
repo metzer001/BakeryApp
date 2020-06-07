@@ -33,10 +33,13 @@
             <div class="action">
                 <p class="price float-left">$@string.Format("{0:f}", product.Price)</p>
                 <a class="btn btn-sm btn-danger order-button float-right" asp-page="/order" asp-route-id="@product.Id" title="Order @product.Name">Order Now</a>
+                <a class="btn btn-danger order-button addproductbtn ml-5" asp-route-id="@product.Id" asp-page="/editproduct">Edit Product</a>
             </div>
         </div>
     }    
 </div>
 
 
-<a class="btn btn-danger order-button" asp-page="/addproduct">Add Product</a>
+<a class="btn btn-danger order-button addproductbtn" asp-page="/addproduct">Add Product</a>
+
+<a class="btn btn-danger order-button addproductbtn ml-5" asp-page="/editproduct">Edit Product</a>
