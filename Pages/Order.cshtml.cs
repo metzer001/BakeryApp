@@ -8,13 +8,21 @@ using BakeryApp.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using System.Net.Mail;
+using Microsoft.Extensions.Hosting;
 
 namespace BakeryApp.Pages
 {
     public class OrderModel : PageModel
     {
         private BakeryContext db;
-        public OrderModel(BakeryContext db) => this.db = db;
+        private IHostEnvironment _env;
+        private BakeryContext _db;
+
+        public OrderModel(IHostEnvironment env, BakeryContext db)
+        {
+            _env = env;
+            _db = db;
+        }
 
 
         [BindProperty(SupportsGet = true)]
@@ -31,11 +39,11 @@ namespace BakeryApp.Pages
         public int OrderQuantity { get; set; } = 1;
 
 
-        public async Task OnGetAsync() => Product = await db.Products.FindAsync(Id);
+        public async Task OnGetAsync() => Product = await _db.Products.FindAsync(Id);
 
         public async Task<IActionResult> OnPostAsync()
         {
-            Product = await db.Products.FindAsync(Id);
+            Product = await _db.Products.FindAsync(Id);
             if (ModelState.IsValid)
             {
                 var body = $@"<p>Thank you, we have received your order for {OrderQuantity} unit(s) of {Product.Name}!</p>
@@ -44,8 +52,10 @@ namespace BakeryApp.Pages
                 We will contact you if we have questions about your order.  Thanks!<br/>";
                 using (var smtp = new SmtpClient())
                 {
+
+                    var wwwRoot = _env.ContentRootPath + "\\wwwroot\\";
                     smtp.DeliveryMethod = SmtpDeliveryMethod.SpecifiedPickupDirectory;
-                    smtp.PickupDirectoryLocation = @"c:\";
+                    smtp.PickupDirectoryLocation = wwwRoot;
                     var message = new MailMessage();
                     message.To.Add(OrderEmail);
                     message.Subject = "Fourth Coffee - New Order";
@@ -54,7 +64,6 @@ namespace BakeryApp.Pages
                     message.From = new MailAddress("sales@fourthcoffee.com");
                     await smtp.SendMailAsync(message);
                 }
-
 
                 return RedirectToPage("OrderSuccess");
             }
