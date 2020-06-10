@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BakeryApp.Areas.Identity.Data;
-using Microsoft.AspNetCore.Identity;
+﻿using BakeryApp.Areas.Identity.Data;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
@@ -14,6 +9,12 @@ namespace BakeryApp.Data
         public BakeryAppUsersContext(DbContextOptions<BakeryAppUsersContext> options)
             : base(options)
         {
+        }
+
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        {
+            optionsBuilder
+           .UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=BakeryDB;");
         }
 
         protected override void OnModelCreating(ModelBuilder builder)

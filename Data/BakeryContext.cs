@@ -14,7 +14,8 @@ namespace BakeryApp.Data
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseSqlite(@"Data source=Bakery.db");
+            optionsBuilder
+            .UseSqlServer(@"Data Source=(localdb)\ProjectsV13;Initial Catalog=BakeryDB;");
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
